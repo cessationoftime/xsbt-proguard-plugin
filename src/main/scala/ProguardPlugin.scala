@@ -64,7 +64,7 @@ object ProguardPlugin extends Plugin {
         val (makeInJarFilter, makeOutJarFilter) = makejf
 
         val proguardInJarsArg = {
-          val inPaths = pij.foldLeft(Map.empty[String, File])((m, p) => m + (p.getName -> p)).values.iterator
+          val inPaths = pij.foldLeft(Map.empty[String, File])((m, p) => m + (p.getAbsolutePath -> p)).values.iterator
           "-injars" :: (List(jp.escaped).iterator ++ inPaths.map(p => p.escaped + "(" + makeInJarFilter(p.asFile.getName) + ")")).mkString(File.pathSeparator) :: Nil
         }
         val proguardOutJarsArg = "-outjars" :: mjp.escaped + "(" + makeOutJarFilter(mjp.asFile.getName) + ")" :: Nil
