@@ -85,7 +85,7 @@ object ProguardPlugin extends Plugin {
   }
 
   val proguardSettings = Seq(
-    minJarPath <<= (crossTarget, projectID, artifact, scalaVersion, artifactName) { (t, module, a, sv, toString) => t / toString(sv, module.copy(revision = module.revision + ".min"), a) asFile },
+    minJarPath <<= (crossTarget, projectID, artifact, scalaVersion, scalaBinaryVersion,artifactName) { (t, module, a, sv,sbv, toString) => t / toString(ScalaVersion(sv,sbv), module.copy(revision = module.revision + ".min"), a) asFile },
     proguardOptions := Nil,
     makeJarFilter := { ((file) => "!META-INF/MANIFEST.MF", (file) => "") },
     proguardDefaultArgs := Seq("-dontwarn", "-dontoptimize", "-dontobfuscate"),
