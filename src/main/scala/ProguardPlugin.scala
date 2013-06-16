@@ -81,7 +81,7 @@ object ProguardPlugin extends Plugin {
 
   def proguardTask(args: List[String], bd: File) {
     val config = new ProGuardConfiguration
-    new ConfigurationParser(args.toArray[String], bd, new Properties()).parse(config)
+    new ConfigurationParser(args.toArray[String], bd, System.getProperties()).parse(config)
     new ProGuard(config).execute
   }
 
